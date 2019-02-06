@@ -1,0 +1,31 @@
+config("abseil_config") {
+  include_dirs = [ "." ]
+}
+
+static_library("abseil") {
+  complete_static_lib = true
+  public_configs = [ ":abseil_config" ]
+  deps = [
+    # TODO: add the rest here (not strictly necessary as everything that's here
+    # depends on whatever is not)
+    "absl/algorithm",
+    "absl/algorithm:container",
+    "absl/base",
+    "absl/container:fixed_array",
+    "absl/container:flat_hash_map",
+    "absl/container:flat_hash_set",
+    "absl/container:inlined_vector",
+    "absl/container:node_hash_map",
+    "absl/container:node_hash_set",
+    "absl/hash",
+    "absl/memory",
+    "absl/meta:type_traits",
+    "absl/numeric:int128",
+    "absl/strings",
+    "absl/types:any",
+    "absl/types:optional",
+    "absl/types:span",
+    "absl/types:variant",
+    "absl/utility",
+  ]
+}

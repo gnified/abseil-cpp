@@ -1,0 +1,10 @@
+source_set("utility") {
+  public = [
+    "utility.h",
+  ]
+  deps = [
+    "../base:base_internal",
+    "../base:config",
+    "../meta:type_traits",
+  ]
+}

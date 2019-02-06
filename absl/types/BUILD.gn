@@ -1,0 +1,126 @@
+import("../../config.gni")
+
+source_set("any") {
+  public = [
+    "any.h",
+  ]
+  deps = [
+    ":bad_any_cast",
+    "../base:config",
+    "../base:core_headers",
+    "../meta:type_traits",
+    "../utility",
+  ]
+}
+
+source_set("bad_any_cast") {
+  public = [
+    "bad_any_cast.h",
+  ]
+
+  deps = [
+    ":bad_any_cast_impl",
+    "../base:config",
+  ]
+}
+
+source_set("bad_any_cast_impl") {
+  sources = [
+    "bad_any_cast.cc",
+    "bad_any_cast.h",
+  ]
+
+  if (abseil_are_exceptions_disabled) {
+    configs += [ "//build/config:exceptions" ]
+    configs -= [ "//build/config:no_exceptions" ]
+  }
+
+  deps = [
+    "../base",
+    "../base:config",
+  ]
+}
+
+source_set("span") {
+  public = [
+    "span.h",
+  ]
+  deps = [
+    "../algorithm",
+    "../base:core_headers",
+    "../base:throw_delegate",
+    "../meta:type_traits",
+  ]
+}
+
+source_set("optional") {
+  public = [
+    "optional.h",
+  ]
+  sources = [
+    "optional.cc",
+  ]
+  deps = [
+    ":bad_optional_access",
+    "../base:config",
+    "../base:core_headers",
+    "../memory",
+    "../meta:type_traits",
+    "../utility",
+  ]
+}
+
+source_set("bad_optional_access") {
+  public = [
+    "bad_optional_access.h",
+  ]
+  sources = [
+    "bad_optional_access.cc",
+  ]
+
+  if (abseil_are_exceptions_disabled) {
+    configs += [ "//build/config:exceptions" ]
+    configs -= [ "//build/config:no_exceptions" ]
+  }
+
+  deps = [
+    "../base",
+    "../base:config",
+  ]
+}
+
+source_set("bad_variant_access") {
+  public = [
+    "bad_variant_access.h",
+  ]
+  sources = [
+    "bad_variant_access.cc",
+  ]
+
+  if (abseil_are_exceptions_disabled) {
+    configs += [ "//build/config:exceptions" ]
+    configs -= [ "//build/config:no_exceptions" ]
+  }
+
+  deps = [
+    "../base",
+    "../base:config",
+  ]
+}
+
+source_set("variant") {
+  public = [
+    "variant.h",
+  ]
+  sources = [
+    "internal/variant.h",
+  ]
+  deps = [
+    ":bad_variant_access",
+    "../base:base_internal",
+    "../base:config",
+    "../base:core_headers",
+    "../meta:type_traits",
+    "../utility",
+  ]
+}

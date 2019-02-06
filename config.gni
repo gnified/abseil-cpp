@@ -1,0 +1,3 @@
+declare_args() {
+  abseil_are_exceptions_disabled = false
+}

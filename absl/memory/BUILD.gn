@@ -1,0 +1,9 @@
+source_set("memory") {
+  public = [
+    "memory.h",
+  ]
+  deps = [
+    "../base:core_headers",
+    "../meta:type_traits",
+  ]
+}

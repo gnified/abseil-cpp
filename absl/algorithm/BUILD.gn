@@ -1,0 +1,17 @@
+source_set("algorithm") {
+  public = [
+    "algorithm.h",
+  ]
+  public_configs = [ "../..:abseil_config" ]
+}
+
+source_set("container") {
+  public = [
+    "container.h",
+  ]
+  deps = [
+    ":algorithm",
+    "../base:core_headers",
+    "../meta:type_traits",
+  ]
+}

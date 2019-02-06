@@ -1,0 +1,232 @@
+source_set("compressed_tuple") {
+  public = [
+    "internal/compressed_tuple.h",
+  ]
+  deps = [
+    "../utility",
+  ]
+}
+
+source_set("fixed_array") {
+  public = [
+    "fixed_array.h",
+  ]
+  deps = [
+    ":compressed_tuple",
+    "../algorithm",
+    "../base:core_headers",
+    "../base:dynamic_annotations",
+    "../base:throw_delegate",
+    "../memory",
+  ]
+}
+
+source_set("inlined_vector") {
+  public = [
+    "inlined_vector.h",
+  ]
+  deps = [
+    "../algorithm",
+    "../base:core_headers",
+    "../base:throw_delegate",
+    "../memory",
+  ]
+}
+
+source_set("flat_hash_map") {
+  public = [
+    "flat_hash_map.h",
+  ]
+  deps = [
+    ":container_memory",
+    ":hash_function_defaults",
+    ":raw_hash_map",
+    "../algorithm:container",
+    "../memory",
+  ]
+}
+
+source_set("flat_hash_set") {
+  public = [
+    "flat_hash_set.h",
+  ]
+  deps = [
+    ":container_memory",
+    ":hash_function_defaults",
+    ":raw_hash_set",
+    "../algorithm:container",
+    "../base:core_headers",
+    "../memory",
+  ]
+}
+
+source_set("node_hash_map") {
+  public = [
+    "node_hash_map.h",
+  ]
+  deps = [
+    ":container_memory",
+    ":hash_function_defaults",
+    ":node_hash_policy",
+    ":raw_hash_map",
+    "../algorithm:container",
+    "../memory",
+  ]
+}
+
+source_set("node_hash_set") {
+  public = [
+    "node_hash_set.h",
+  ]
+  deps = [
+    ":hash_function_defaults",
+    ":node_hash_policy",
+    ":raw_hash_set",
+    "../algorithm:container",
+    "../memory",
+  ]
+}
+
+source_set("container_memory") {
+  public = [
+    "internal/container_memory.h",
+  ]
+  deps = [
+    "../memory",
+    "../utility",
+  ]
+}
+
+source_set("hash_function_defaults") {
+  public = [
+    "internal/hash_function_defaults.h",
+  ]
+  deps = [
+    "../base:config",
+    "../hash",
+    "../strings",
+  ]
+}
+
+source_set("hash_policy_traits") {
+  public = [
+    "internal/hash_policy_traits.h",
+  ]
+  deps = [
+    "../meta:type_traits",
+  ]
+}
+
+source_set("hashtable_debug") {
+  public = [
+    "internal/hashtable_debug.h",
+  ]
+  deps = [
+    ":hashtable_debug_hooks",
+  ]
+}
+
+source_set("hashtable_debug_hooks") {
+  public = [
+    "internal/hashtable_debug_hooks.h",
+  ]
+}
+
+source_set("hashtablez_force_sampling") {
+  sources = [
+    "internal/hashtablez_force_sampling.cc",
+  ]
+  deps = [
+    ":hashtablez_sampler",
+  ]
+}
+
+source_set("hashtablez_sampler") {
+  public = [
+    "internal/hashtablez_sampler.h",
+  ]
+  sources = [
+    "internal/hashtablez_sampler.cc",
+    "internal/hashtablez_sampler_force_weak_definition.cc",
+  ]
+  deps = [
+    ":have_sse",
+    "../base",
+    "../base:core_headers",
+    "../debugging:stacktrace",
+    "../memory",
+    "../synchronization",
+    "../utility",
+  ]
+}
+
+source_set("node_hash_policy") {
+  public = [
+    "internal/node_hash_policy.h",
+  ]
+}
+
+source_set("raw_hash_map") {
+  public = [
+    "internal/raw_hash_map.h",
+  ]
+  deps = [
+    ":container_memory",
+    ":raw_hash_set",
+  ]
+}
+
+source_set("have_sse") {
+  public = [
+    "internal/have_sse.h",
+  ]
+}
+
+source_set("common") {
+  public = [
+    "internal/common.h",
+  ]
+  deps = [
+    "../meta:type_traits",
+  ]
+}
+
+source_set("raw_hash_set") {
+  public = [
+    "internal/raw_hash_set.h",
+  ]
+  sources = [
+    "internal/raw_hash_set.cc",
+  ]
+  deps = [
+    ":common",
+    ":compressed_tuple",
+    ":container_memory",
+    ":hash_policy_traits",
+    ":hashtable_debug_hooks",
+    ":hashtablez_sampler",
+    ":have_sse",
+    ":layout",
+    "../base:bits",
+    "../base:config",
+    "../base:core_headers",
+    "../base:endian",
+    "../memory",
+    "../meta:type_traits",
+    "../types:optional",
+    "../utility",
+  ]
+}
+
+source_set("layout") {
+  public = [
+    "internal/layout.h",
+  ]
+  deps = [
+    "../base:core_headers",
+    "../meta:type_traits",
+    "../strings",
+    "../types:span",
+    "../utility",
+  ]
+}

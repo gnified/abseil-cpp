@@ -1,0 +1,8 @@
+source_set("type_traits") {
+  public = [
+    "type_traits.h",
+  ]
+  deps = [
+    "../base:config",
+  ]
+}

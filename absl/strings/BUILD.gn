@@ -1,0 +1,104 @@
+source_set("strings") {
+  public = [
+    "ascii.h",
+    "charconv.h",
+    "escaping.h",
+    "match.h",
+    "numbers.h",
+    "str_cat.h",
+    "str_join.h",
+    "str_replace.h",
+    "str_split.h",
+    "string_view.h",
+    "strip.h",
+    "substitute.h",
+  ]
+  sources = [
+    "ascii.cc",
+    "charconv.cc",
+    "escaping.cc",
+    "internal/charconv_bigint.cc",
+    "internal/charconv_bigint.h",
+    "internal/charconv_parse.cc",
+    "internal/charconv_parse.h",
+    "internal/memutil.cc",
+    "internal/memutil.h",
+    "internal/stl_type_traits.h",
+    "internal/str_join_internal.h",
+    "internal/str_split_internal.h",
+    "match.cc",
+    "numbers.cc",
+    "str_cat.cc",
+    "str_replace.cc",
+    "str_split.cc",
+    "string_view.cc",
+    "substitute.cc",
+  ]
+  deps = [
+    ":internal",
+    "../base",
+    "../base:bits",
+    "../base:config",
+    "../base:core_headers",
+    "../base:endian",
+    "../base:throw_delegate",
+    "../memory",
+    "../meta:type_traits",
+    "../numeric:int128",
+  ]
+}
+
+source_set("internal") {
+  public = [
+    "internal/char_map.h",
+    "internal/ostringstream.h",
+    "internal/resize_uninitialized.h",
+    "internal/utf8.h",
+  ]
+  sources = [
+    "internal/ostringstream.cc",
+    "internal/utf8.cc",
+  ]
+  deps = [
+    "../base:core_headers",
+    "../base:endian",
+    "../meta:type_traits",
+  ]
+}
+
+source_set("str_format") {
+  public = [
+    "str_format.h",
+  ]
+  deps = [
+    ":str_format_internal",
+  ]
+}
+
+source_set("str_format_internal") {
+  public = [
+    "internal/str_format/arg.h",
+    "internal/str_format/bind.h",
+    "internal/str_format/checker.h",
+    "internal/str_format/extension.h",
+    "internal/str_format/float_conversion.h",
+    "internal/str_format/output.h",
+    "internal/str_format/parser.h",
+  ]
+  sources = [
+    "internal/str_format/arg.cc",
+    "internal/str_format/bind.cc",
+    "internal/str_format/extension.cc",
+    "internal/str_format/float_conversion.cc",
+    "internal/str_format/output.cc",
+    "internal/str_format/parser.cc",
+  ]
+  deps = [
+    ":strings",
+    "../base:core_headers",
+    "../container:inlined_vector",
+    "../meta:type_traits",
+    "../numeric:int128",
+    "../types:span",
+  ]
+}

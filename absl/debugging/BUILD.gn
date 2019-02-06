@@ -1,0 +1,115 @@
+source_set("stacktrace") {
+  public = [
+    "stacktrace.h",
+  ]
+  sources = [
+    "stacktrace.cc",
+  ]
+  deps = [
+    ":debugging_internal",
+    "../base",
+    "../base:core_headers",
+  ]
+}
+
+source_set("symbolize") {
+  public = [
+    "internal/symbolize.h",
+    "symbolize.h",
+  ]
+  sources = [
+    "symbolize.cc",
+    "symbolize_elf.inc",
+    "symbolize_unimplemented.inc",
+    "symbolize_win32.inc",
+  ]
+  deps = [
+    ":debugging_internal",
+    ":demangle_internal",
+    "../base",
+    "../base:core_headers",
+    "../base:malloc_internal",
+  ]
+}
+
+source_set("examine_stack") {
+  public = [
+    "internal/examine_stack.h",
+  ]
+  sources = [
+    "internal/examine_stack.cc",
+  ]
+  deps = [
+    ":stacktrace",
+    ":symbolize",
+    "../base",
+    "../base:core_headers",
+  ]
+}
+
+source_set("failure_signal_handler") {
+  public = [
+    "failure_signal_handler.h",
+  ]
+  sources = [
+    "failure_signal_handler.cc",
+  ]
+  deps = [
+    ":examine_stack",
+    ":stacktrace",
+    "../base",
+    "../base:config",
+    "../base:core_headers",
+  ]
+}
+
+source_set("debugging_internal") {
+  public = [
+    "internal/address_is_readable.h",
+    "internal/elf_mem_image.h",
+    "internal/stacktrace_aarch64-inl.inc",
+    "internal/stacktrace_arm-inl.inc",
+    "internal/stacktrace_config.h",
+    "internal/stacktrace_generic-inl.inc",
+    "internal/stacktrace_powerpc-inl.inc",
+    "internal/stacktrace_unimplemented-inl.inc",
+    "internal/stacktrace_win32-inl.inc",
+    "internal/stacktrace_x86-inl.inc",
+    "internal/vdso_support.h",
+  ]
+  sources = [
+    "internal/address_is_readable.cc",
+    "internal/elf_mem_image.cc",
+    "internal/vdso_support.cc",
+  ]
+  deps = [
+    "../base",
+    "../base:core_headers",
+    "../base:dynamic_annotations",
+  ]
+}
+
+source_set("demangle_internal") {
+  public = [
+    "internal/demangle.h",
+  ]
+  sources = [
+    "internal/demangle.cc",
+  ]
+  deps = [
+    "../base",
+    "../base:core_headers",
+  ]
+}
+
+source_set("leak_check") {
+  public = [
+    "internal/leak_check.h",
+  ]
+  sources = [
+    "internal/leak_check.cc",
+  ]
+  deps = [
+    "../base:core_headers",
+  ]
+}

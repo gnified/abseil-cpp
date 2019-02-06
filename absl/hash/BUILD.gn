@@ -1,0 +1,35 @@
+source_set("hash") {
+  public = [
+    "hash.h",
+  ]
+  sources = [
+    "internal/hash.cc",
+    "internal/hash.h",
+  ]
+  deps = [
+    ":city",
+    "../base:core_headers",
+    "../base:endian",
+    "../container:fixed_array",
+    "../meta:type_traits",
+    "../numeric:int128",
+    "../strings",
+    "../types:optional",
+    "../types:variant",
+    "../utility",
+  ]
+}
+
+source_set("city") {
+  public = [
+    "internal/city.h",
+  ]
+  sources = [
+    "internal/city.cc",
+  ]
+  deps = [
+    "../base:config",
+    "../base:core_headers",
+    "../base:endian",
+  ]
+}
